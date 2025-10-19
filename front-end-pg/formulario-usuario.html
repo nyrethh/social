@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - TEEKER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .form-container h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background-color: var(--teeker-purple);
+            color: #fff;
+        }
+     
+        .btn-secondary {
+            background-color: #eee;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="main-content">
+        <div class="form-container">
+            <h2 id="form-title">Actualiza tu Perfil.</h2>
+           <form id="profile-form" enctype="multipart/form-data">
+    <input type="hidden" id="cod_per">
+    <input type="hidden" id="fky_usu">
+
+        <div class="form-group">
+            <label for="alias_input">Alias (usuario)</label>
+            <input type="text" id="alias_input" name="alias_input" required>
+        </div>
+        <div class="form-group">
+            <label for="email_input">Email</label>
+            <input type="email" id="email_input" name="email_input" required>
+        </div>
+
+    <div class="form-group">
+        <label for="nm1_per">Primer Nombre</label>
+        <input type="text" id="nm1_per" name="nm1_per" required>
+    </div>
+
+        <div class="form-group">
+        <label for="nm1_per">Segundo Nombre</label>
+        <input type="text" id="nm2_per" name="nm2_per" >
+    </div>
+
+    
+        <div class="form-group">
+        <label for="nm1_per">Primer Apellido</label>
+        <input type="text" id="ap1_per" name="ap1_per" >
+    </div>
+        <div class="form-group">
+        <label for="nm1_per">Segundo Apellido</label>
+        <input type="text" id="ap2_per" name="ap2_per" >
+
+    <div class="form-group">
+        <label for="sex_per">Sexo</label>
+        <select id="sex_per" name="sex_per">
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="per_per_file">Foto de Perfil</label>
+        <input type="file" id="per_per_file" name="per_per">
+        <div style="margin-top:.5rem"><img id="preview-perfil" src="" alt="Preview perfil" style="max-width:120px;border-radius:8px;display:none"/></div>
+    </div>
+    <div class="form-group">
+        <label for="por_per_file">Foto de Portada</label>
+        <input type="file" id="por_per_file" name="por_per">
+        <div style="margin-top:.5rem"><img id="preview-portada" src="" alt="Preview portada" style="max-width:240px;border-radius:8px;display:none"/></div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn-secondary" onclick="window.history.back();">Cancelar</button>
+    </div>
+</form>
+        </div>
+    </main>
+
+    <script src="js/sesion.js"></script>
+    <script src="js/editar-usuario.js" type="module"></script>
+</body>
+</html>

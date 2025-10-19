@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - TEEKER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+       
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="card login-card">
+            
+            <div class="login-header">
+                <h1>TEEKER</h1>
+                <h2>Iniciar Sesión</h2>
+                <p>Ingresa tus credenciales para acceder al panel de administración.</p>
+            </div>
+            
+            <form id="form-login">
+                <div>
+                    <label for="username">Alias</label>
+                    <input type="text" id="username" placeholder="Tu alias " class="input-field" required>
+                </div>
+                <div>
+                    <label for="password">Clave</label>
+                    <input type="password" id="password" placeholder="••••••••" class="input-field" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-full-width">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Acceder</span>
+                    </button>
+                </div>
+                
+                <div class="login-footer">
+                    <a href="registarse.html">¿No tienes una cuenta? ¡Registrate acá!</a>
+                </div>
+                <p id="error-message" class="error-message-text"></p>
+            </form>
+        </div>
+    </div>
+<script src="js/core.js"></script>
+<script src="js/login.js"></script>
+
+
+</body>
+</html>

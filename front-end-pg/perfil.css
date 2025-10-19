@@ -1,0 +1,199 @@
+/* ==================================================================== */
+/* --- ESTILOS PARA LA VISTA DE USUARIO ESTÁNDAR (Propuesta 4) --- */
+/* ==================================================================== */
+
+/* Colores de la paleta principal */
+:root {
+    --brand-purple: #522a70;
+    --brand-yellow: #fbd050;
+    --brand-pink: #f29cb7;
+    --brand-beige: #faeadd;
+    --brand-offwhite: #faf8f3;
+    --brand-dark: #222023;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--brand-offwhite);
+    color: var(--brand-dark);
+}
+
+.user-main-view {
+    padding-top: 80px; /* Espacio para la barra de navegación superior */
+}
+
+.user-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 1000;
+}
+
+.user-navbar-brand h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--brand-purple);
+    margin: 0;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    color: #555;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.logout-btn i {
+    margin-right: 0.5rem;
+}
+
+.logout-btn:hover {
+    background-color: #fbd050;
+    color: var(--brand-dark);
+}
+
+.user-profile-layout {
+    max-width: 800px;
+    margin: 2rem auto;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.profile-card,
+.profile-secondary-card,
+.profile-content-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 2rem;
+    position: relative;
+    text-align: center;
+}
+
+.profile-cover {
+    height: 200px;
+    background-color: var(--brand-purple);
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.profile-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    background-color: var(--brand-offwhite);
+    position: relative;
+    top: -75px;
+    margin: 0 auto -75px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    margin-top: 2rem;
+}
+
+.profile-info h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.profile-info p {
+    font-size: 1rem;
+    color: #888;
+    margin: 0;
+}
+
+.edit-profile-btn {
+    background-color: var(--brand-yellow);
+    color: var(--brand-dark);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s;
+}
+
+.edit-profile-btn:hover {
+    background-color: var(--brand-pink);
+}
+
+.profile-secondary-card h3,
+.profile-content-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--brand-purple);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.info-item i {
+    color: var(--brand-purple);
+    margin-right: 1rem;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    margin-top: 1.5rem;
+}
+
+.stats-grid .stat-item {
+    text-align: center;
+}
+
+.stats-grid .stat-item span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brand-dark);
+}
+
+.stats-grid .stat-item p {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0;
+}
+
+.posts-list .placeholder-text {
+    font-style: italic;
+    color: #999;
+}

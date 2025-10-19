@@ -1,0 +1,293 @@
+/* --- Paleta de Colores Teeker (Copiada del style.css) --- */
+:root {
+    --teeker-purple: #522a70;
+    --teeker-yellow: #fbd050;
+    --teeker-pink: #f29cb7;
+    --teeker-cream: #faeadd;
+    --teeker-dark: #222023;
+    --teeker-light: #faf8f3;
+}
+
+/* --- Estilos Generales y Tipografía --- */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--teeker-light);
+    color: var(--teeker-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Usamos min-height para que quepa todo el contenido */
+    margin: 0;
+    padding: 20px; /* Padding general para evitar que toque los bordes en móvil */
+}
+
+/* ======================================================= */
+/* --- CONTENEDOR PRINCIPAL (DESKTOP) --- */
+/* ======================================================= */
+
+.main-register-wrapper {
+    display: flex;
+    max-width: 900px; /* Ancho máximo para el formulario + logo */
+    width: 100%;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    overflow: hidden; /* Importante para los bordes redondeados */
+}
+
+.logo-area {
+    flex: 1; /* Ocupa 1/2 del espacio en escritorio */
+    background-color: var(--teeker-purple);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+}
+
+.logo-box {
+    text-align: center;
+}
+
+.logo-icon {
+    font-size: 4rem;
+    color: var(--teeker-yellow);
+    margin-bottom: 1rem;
+}
+
+.logo-area h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.logo-area p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #e5e7eb;
+}
+
+.form-area {
+    flex: 1; /* Ocupa la otra mitad */
+    padding: 2rem;
+}
+
+.register-card {
+    /* Quitamos el box-shadow de .card para que solo lo tenga el wrapper */
+    box-shadow: none; 
+    padding: 0; 
+    background-color: transparent;
+}
+
+/* ======================================================= */
+/* --- ESTILOS DE FORMULARIO REUTILIZADOS --- */
+/* ======================================================= */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.login-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--teeker-dark);
+    margin-bottom: 0.25rem;
+}
+
+.login-header p {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--teeker-purple);
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid var(--teeker-yellow);
+    padding-bottom: 0.25rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Reducimos el espacio un poco */
+}
+
+form label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 0.25rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(82, 42, 112, 0.2);
+    border-color: var(--teeker-purple);
+}
+
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-actions {
+    padding-top: 0.5rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--teeker-purple);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #6d3a94;
+    transform: translateY(-2px);
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+.login-footer {
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.login-footer a {
+    color: var(--teeker-purple);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.login-footer a:hover {
+    color: #6d3a94;
+}
+
+/* ======================================================= */
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+/* ======================================================= */
+
+@media (max-width: 768px) {
+    
+    body {
+        /* Ajuste para móvil, permitiendo desplazamiento */
+        align-items: flex-start; 
+        padding-top: 20px;
+    }
+    
+    .main-register-wrapper {
+        flex-direction: column; /* Apila el logo y el formulario */
+        box-shadow: none; /* Quitamos la sombra para un look más limpio en móvil */
+        border: none;
+        max-width: 100%;
+    }
+    
+    .logo-area {
+        border-radius: 1rem 1rem 0 0;
+        padding: 2rem 1.5rem;
+    }
+    
+    .logo-area h1 {
+        font-size: 2.5rem;
+    }
+    
+    .form-area {
+        padding: 1.5rem;
+        /* Simula la tarjeta blanca del diseño original */
+        background-color: white; 
+        border-radius: 0 0 1rem 1rem;
+        box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+    
+    .grid-2-cols {
+        grid-template-columns: 1fr; /* Apila los campos en móviles */
+    }
+}
+
+
+
+/* ======================================================= */
+/* --- CONTENEDOR PRINCIPAL (DESKTOP) --- */
+/* (Asegúrate de tener esta sección para el diseño dual) */
+/* ======================================================= */
+
+.main-register-wrapper {
+    display: flex;
+    max-width: 900px; 
+    width: 100%;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    overflow: hidden; 
+}
+
+/* ... (Estilos para .logo-area, .logo-box, .form-area, etc.) ... */
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--teeker-purple);
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid var(--teeker-yellow);
+    padding-bottom: 0.25rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; 
+}
+
+/* CLAVE para el diseño: divide Primer Nombre/Apellido y Segundo Nombre/Apellido */
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ... (Estilos para .input-field, .btn, y .login-footer) ... */
+
+
+/* ======================================================= */
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+/* ======================================================= */
+
+@media (max-width: 768px) {
+    /* ... (El resto de tus ajustes móviles) ... */
+    
+    /* Asegura que los campos apilados vuelvan a ser de una columna en móvil */
+    .grid-2-cols {
+        grid-template-columns: 1fr; 
+    }
+}

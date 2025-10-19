@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Teeker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar hidden" id="admin-sidebar">
+        <div class="sidebar-header">
+            <h1>TEEKER</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" id="nav-perfil" class="nav-link"><i class="fas fa-home"></i><span>Mi Perfil</span></a></li>
+                <li class="menu-separator">ADMINISTRACIÓN</li>
+                <li><a href="#" id="nav-usuarios" class="nav-link"><i class="fas fa-users-cog"></i><span>Usuarios</span></a></li>
+                <li><a href="#" id="nav-roles" class="nav-link"><i class="fas fa-user-shield"></i><span>Roles</span></a></li>
+                <li><a href="#" id="nav-personas" class="nav-link"><i class="fas fa-id-card"></i><span>Perfiles</span></a></li>
+                <li><a href="#" id="nav-privacidad" class="nav-link"><i class="fas fa-lock"></i><span>Privacidad</span></a></li>
+                <li class="menu-separator">DATOS GENERALES</li>
+                <li><a href="#" id="nav-ubicaciones" class="nav-link"><i class="fas fa-map-marker-alt"></i><span>Ubicaciones</span></a></li>
+                <li><a href="#" id="nav-zonahoraria" class="nav-link"><i class="fas fa-clock"></i><span>Zonas Horarias</span></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+             <a href="#" id="nav-cerrar-sesion" class="nav-link"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+        </div>
+    </aside>
+
+    <main id="view-login" class="login-view">
+        <div class="login-container">
+            <h1 class="logo-title">TEEKER</h1>
+            <h2>Inicia Sesión</h2>
+            <form id="form-login">
+                <div>
+                    <label for="login-alias">Alias o Email</label>
+                    <input type="text" id="login-alias" placeholder="usuario o correo@ejemplo.com" class="input-field" required>
+                </div>
+                <div>
+                    <label for="login-clave">Clave</label>
+                    <input type="password" id="login-clave" placeholder="••••••••" class="input-field" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Entrar</span>
+                    </button>
+                </div>
+                <p id="login-error" class="error-message hidden">Credenciales incorrectas.</p>
+            </form>
+        </div>
+    </main>
+
+    <main id="view-perfil" class="hidden social-view">
+        <header class="profile-header">
+            <div id="perfil-cover-photo" class="cover-photo"></div>
+            <div class="profile-info-container">
+                <div id="perfil-profile-photo" class="profile-photo"></div>
+                <h2 id="perfil-nombre-completo"></h2>
+                <p class="profile-alias" id="perfil-alias"></p>
+                <div class="profile-actions">
+                    <button class="btn btn-secondary" id="btn-editar-perfil"><i class="fas fa-user-edit"></i> Editar Perfil</button>
+                    <button class="btn btn-admin hidden" id="btn-admin-panel"><i class="fas fa-tools"></i> Panel de Administración</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="social-content-container">
+            <section class="profile-details-card card">
+                <h3>Detalles</h3>
+                <p><strong>Email:</strong> <span id="perfil-email"></span></p>
+                <p><strong>Sexo:</strong> <span id="perfil-sexo"></span></p>
+            </section>
+
+            <section class="post-creation-card card">
+                <h3>Crear Publicación</h3>
+                <form id="form-publicacion">
+                    <textarea id="post-content" placeholder="¿Qué estás pensando hoy?" rows="3" class="input-field" required></textarea>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Publicar
+                        </button>
+                    </div>
+                </form>
+            </section>
+            
+            <section class="feed-section">
+                <h3>Mi Feed</h3>
+                <div id="feed-container">
+                    <div class="card post-mock">
+                        <div class="post-header">
+                            <div class="post-author-photo"></div>
+                            <span class="post-author-name">Ejemplo de Post</span>
+                        </div>
+                        <p>¡Bienvenido/a a Teeker! Esta es tu primera publicación de ejemplo. Haz clic en 'Publicar' para añadir la tuya.</p>
+                        <small>Hace 5 minutos</small>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="perfil-edit-form-container" class="card hidden">
+        <h3 class="form-title">Editar Mi Perfil</h3>
+        <form id="form-editar-perfil">
+            <input type="hidden" id="edit-persona-cod_per">
+            <div>
+                <label for="edit-nm1_per">Primer Nombre</label>
+                <input type="text" id="edit-nm1_per" class="input-field" required>
+            </div>
+             <div>
+                <label for="edit-nm2_per">Segundo Nombre</label>
+                <input type="text" id="edit-nm2_per" class="input-field">
+            </div>
+             <div>
+                <label for="edit-ap1_per">Primer Apellido</label>
+                <input type="text" id="edit-ap1_per" class="input-field" required>
+            </div>
+             <div>
+                <label for="edit-ap2_per">Segundo Apellido</label>
+                <input type="text" id="edit-ap2_per" class="input-field">
+            </div>
+            <div>
+                <label for="edit-sex_per">Sexo</label>
+                <select id="edit-sex_per" class="input-field">
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+            </div>
+            <div>
+                <label for="edit-per_per">URL Foto de Perfil</label>
+                <input type="text" id="edit-per_per" class="input-field">
+            </div>
+             <div>
+                <label for="edit-por_per">URL Foto de Portada</label>
+                <input type="text" id="edit-por_per" class="input-field">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" onclick="perfil_hideEditForm()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <main id="view-usuarios" class="hidden admin-view">
+        <header>
+            <div>
+                <h2>Gestión de Usuarios</h2>
+                <p>Añade, edita o elimina usuarios del sistema.</p>
+            </div>
+             <button class="btn btn-primary" onclick="user_form_container.scrollIntoView({ behavior: 'smooth' }); user_resetForm();">
+                <i class="fas fa-plus"></i>Añadir Usuario
+            </button>
+        </header>
+        <div class="grid-container">
+            <div class="grid-col-span-1">
+                <div id="user_form_container" class="card">
+                    <h3 id="user-form-title" class="form-title">Añadir Nuevo Usuario</h3>
+                    <form id="form-usuario">
+                        <input type="hidden" id="user-cod_usu">
+                        <div><label for="user-ali_usu">Alias</label>
+                            <input type="text" id="user-ali_usu" placeholder="ej: john.doe" class="input-field" required></div>
+                        <div><label for="user-ema_usu">Email</label>
+                            <input type="email" id="user-ema_usu" placeholder="ej: usuario@correo.com" class="input-field" required>
+                        </div>
+                        <div><label for="user-cla_usu">Clave</label>
+                            <input type="password" id="user-cla_usu" placeholder="••••••••" class="input-field" required>
+                        </div>
+                        <div>
+                            <label for="user-est_usu">Estado</label>
+                            <select id="user-est_usu" class="input-field">
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span id="user-save-button-text">Guardar Usuario</span>
+                            </button>
+                                <button type="button" id="user-cancel-button" class="btn btn-secondary hidden" onclick="user_resetForm()">Cancelar</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div class="grid-col-span-2">
+                <div class="card table-card">
+                    <div class="table-header">
+                        <h3>Lista de Usuarios</h3>
+                        <span id="user-count" class="table-count"></span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th style="text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id="view-roles" class="hidden admin-view">
+      <header>
+            <div>
+                <h2>Gestión de Roles</h2>
+                <p>Añade, edita o elimina roles del sistema.</p>
+            </div>
+             <button class="btn btn-primary" onclick="role_form_container.scrollIntoView({ behavior: 'smooth' }); role_resetForm();">
+                <i class="fas fa-plus"></i>Añadir Rol
+            </button>
+        </header>
+        <div class="grid-container">
+            <div class="grid-col-span-1">
+                <div id="role_form_container" class="card">
+                    <h3 id="role-form-title" class="form-title">Añadir Nuevo Rol</h3>
+                    <form id="form-rol">
+                        <input type="hidden" id="role-cod_rol">
+                        <div>
+                            <label for="role-nom_rol">Nombre del Rol</label>
+                            <input type="text" id="role-nom_rol" placeholder="ej: Administrador" class="input-field" required></div>
+                        <div>
+                            <label for="role-des_rol">Descripción</label>
+                            <textarea id="role-des_rol" placeholder="Describe la función del rol..." class="input-field" rows="3" required></textarea>
+                        </div>
+                        <div>
+                            <label for="role-est_rol">Estado</label>
+                            <select id="role-est_rol" class="input-field">
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span id="role-save-button-text">Guardar Rol</span>
+                            </button>
+                            <button type="button" id="role-cancel-button" class="btn btn-secondary hidden" onclick="role_resetForm()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="grid-col-span-2">
+                <div class="card table-card">
+                    <div class="table-header">
+                        <h3>Lista de Roles</h3>
+                        <span id="role-count" class="table-count"></span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th style="text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="role-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id="view-privacidad" class="hidden admin-view">
+        <header>
+            <div>
+                <h2>Gestión de Privacidad</h2>
+                <p>Define los niveles de privacidad del sistema.</p>
+            </div>
+             <button class="btn btn-primary" onclick="privacidad_form_container.scrollIntoView({ behavior: 'smooth' }); privacidad_resetForm();">
+                <i class="fas fa-plus"></i>Añadir Tipo
+            </button>
+        </header>
+        <div class="grid-container">
+            <div class="grid-col-span-1">
+                <div id="privacidad_form_container" class="card">
+                    <h3 id="privacidad-form-title" class="form-title">Añadir Tipo de Privacidad</h3>
+                    <form id="form-privacidad">
+                        <input type="hidden" id="privacidad-cod_tip">
+                        <div>
+                            <label for="privacidad-nom_tip">Nombre del Tipo</label>
+                            <input type="text" id="privacidad-nom_tip" placeholder="ej: Solo Amigos" class="input-field" required>
+                        </div>
+                        <div>
+                            <label for="privacidad-est_tip">Estado</label>
+                            <select id="privacidad-est_tip" class="input-field">
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span id="privacidad-save-button-text">Guardar</span>
+                            </button>
+                            <button type="button" id="privacidad-cancel-button" class="btn btn-secondary hidden" onclick="privacidad_resetForm()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="grid-col-span-2">
+                <div class="card table-card">
+                    <div class="table-header">
+                        <h3>Lista de Tipos de Privacidad</h3>
+                        <span id="privacidad-count" class="table-count"></span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                    <th style="text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="privacidad-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id="view-personas" class="hidden admin-view">
+     <header>
+        <div>
+            <h2>Gestión de Perfiles</h2>
+            <p>Añade, edita o elimina perfiles personales de los usuarios.</p>
+        </div>
+        <button class="btn btn-primary" onclick="persona_form_container.scrollIntoView({ behavior: 'smooth' }); persona_resetForm();">
+            <i class="fas fa-plus"></i>Añadir Perfil
+        </button>
+    </header>
+    <div class="grid-container">
+        <div class="grid-col-span-1">
+            <div id="persona_form_container" class="card">
+                <h3 id="persona-form-title" class="form-title">Añadir Nuevo Perfil</h3>
+                <form id="form-persona">
+                    <input type="hidden" id="persona-cod_per">
+                    <div>
+                        <label for="persona-fky_usu">Usuario</label>
+                        <select id="persona-fky_usu" class="input-field" required></select>
+                    </div>
+                    <div>
+                        <label for="persona-nm1_per">Primer Nombre</label>
+                        <input type="text" id="persona-nm1_per" placeholder="ej: Juan" class="input-field" required>
+                    </div>
+                     <div>
+                        <label for="persona-nm2_per">Segundo Nombre</label>
+                        <input type="text" id="persona-nm2_per" placeholder="" class="input-field">
+                    </div>
+
+                     <div>
+                        <label for="persona-ap1_per">Primer Apellido</label>
+                        <input type="text" id="persona-ap1_per" placeholder="ej: Pérez" class="input-field" required>
+                    </div>
+
+                     <div>
+                        <label for="persona-ap2_per">Segundo Apellido</label>
+                        <input type="text" id="persona-ap2_per" placeholder="ej: Pérez" class="input-field">
+                    </div>
+
+                    <div>
+                        <label for="persona-sex_per">Sexo</label>
+                        <select id="persona-sex_per" class="input-field">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="persona-est_per">Estado</label>
+                        <select id="persona-est_per" class="input-field">
+                            <option value="A">Activo</option>
+                            <option value="I">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            <span id="persona-save-button-text">Guardar Perfil</span>
+                        </button>
+                        <button type="button" id="persona-cancel-button" class="btn btn-secondary hidden" onclick="persona_resetForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="grid-col-span-2">
+            <div class="card table-card">
+                <div class="table-header">
+                    <h3>Lista de Perfiles</h3>
+                    <span id="persona-count" class="table-count"></span>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Alias de Usuario</th>
+                                <th>Estado</th>
+                                <th style="text-align: center;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="persona-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <main id="view-ubicaciones" class="hidden admin-view">
+        <header>
+            <div>
+                <h2>Gestión de Ubicaciones</h2>
+                <p>Administra los estados y ciudades de cada país.</p>
+            </div>
+            <div class="form-actions">
+                <button id="btn-show-estados" class="btn btn-primary">Gestionar Estados</button>
+                <button id="btn-show-ciudades" class="btn btn-secondary">Gestionar Ciudades</button>
+            </div>
+        </header>
+
+        <div id="subview-estados">
+            <div class="grid-container">
+                <div class="grid-col-span-1">
+                    <div class="card">
+                        <h3 class="form-title">Añadir Nuevo Estado</h3>
+                        <form id="form-estado">
+                            <div>
+                                <label for="pais-select-estado">País</label>
+                                <select id="pais-select-estado" class="input-field" required></select>
+                            </div>
+                            <div>
+                                <label for="estado-nom_est">Nombre del Estado</label>
+                                <input type="text" id="estado-nom_est" placeholder="ej: California" class="input-field" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i><span>Añadir Estado</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="grid-col-span-2">
+                    <div class="card table-card">
+                        <div class="table-header">
+                            <h3>Lista de Estados</h3>
+                            <span id="estado-count" class="table-count"></span>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre del Estado</th>
+                                        <th>País</th>
+                                        <th>Estado</th>
+                                        <th style="text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="estado-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="subview-ciudades" class="hidden">
+            <div class="grid-container">
+                <div class="grid-col-span-1">
+                    <div class="card">
+                        <h3 class="form-title">Añadir Nueva Ciudad</h3>
+                        <form id="form-ciudad">
+                            <div>
+                                <label for="pais-select-ciudad">País</label>
+                                <select id="pais-select-ciudad" class="input-field" required></select>
+                            </div>
+                            <div>
+                                <label for="estado-select-ciudad">Estado</label>
+                                <select id="estado-select-ciudad" class="input-field" required></select>
+                            </div>
+                            <div>
+                                <label for="ciudad-nom_ciu">Nombre de la Ciudad</label>
+                                <input type="text" id="ciudad-nom_ciu" placeholder="ej: Los Ángeles" class="input-field" required>
+                            </div>
+                            <div>
+                                <label for="zonahoraria-select-ciudad">Zona Horaria</label>
+                                <select id="zonahoraria-select-ciudad" class="input-field" required></select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i><span>Añadir Ciudad</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="grid-col-span-2">
+                    <div class="card table-card">
+                        <div class="table-header">
+                            <h3>Lista de Ciudades</h3>
+                            <span id="ciudad-count" class="table-count"></span>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre de la Ciudad</th>
+                                        <th>Estado</th>
+                                        <th>País</th>
+                                        <th>Zona Horaria</th> <th style="text-align: center;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ciudad-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id="view-zonahoraria" class="hidden admin-view">
+        <header>
+            <div>
+                <h2>Gestión de Zonas Horarias</h2>
+                <p>Administra las zonas horarias del sistema.</p>
+            </div>
+             <button class="btn btn-primary" onclick="zonahoraria_form_container.scrollIntoView({ behavior: 'smooth' }); zonahoraria_resetForm();">
+                <i class="fas fa-plus"></i>Añadir Zona
+            </button>
+        </header>
+         <div class="grid-container">
+            <div class="grid-col-span-1">
+                <div id="zonahoraria_form_container" class="card">
+                    <h3 id="zonahoraria-form-title" class="form-title">Añadir Nueva Zona Horaria</h3>
+                    <form id="form-zonahoraria">
+                        <input type="hidden" id="zonahoraria-cod_zon">
+                        <div>
+                            <label for="zonahoraria-nom_zon">Nombre</label>
+                            <input type="text" id="zonahoraria-nom_zon" placeholder="ej: América/Bogotá" class="input-field" required>
+                        </div>
+                         <div>
+                            <label for="zonahoraria-acr_zon">Acrónimo</label>
+                            <input type="text" id="zonahoraria-acr_zon" placeholder="ej: COT" class="input-field" required>
+                        </div>
+                        <div>
+                            <label for="zonahoraria-dif_zon">Diferencia UTC</label>
+                            <input type="number" id="zonahoraria-dif_zon" placeholder="ej: -5 (para UTC-5)" class="input-field" required>
+                        </div>
+                        <div>
+                            <label for="zonahoraria-est_zon">Estado</label>
+                            <select id="zonahoraria-est_zon" class="input-field">
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span id="zonahoraria-save-button-text">Guardar</span>
+                            </button>
+                            <button type="button" id="zonahoraria-cancel-button" class="btn btn-secondary hidden" onclick="zonahoraria_resetForm()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <div class="grid-col-span-2">
+            <div class="card table-card">
+                <div class="table-header">
+                    <h3>Lista de Zonas Horarias</h3>
+                    <span id="zonahoraria-count" class="table-count"></span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Acrónimo</th>
+                            <th>Diferencia UTC</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="zonahoraria-table"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <script src="./js/core.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/perfil.js"></script>
+    <script src="./js/usuarios.js"></script>
+    <script src="./js/roles.js"></script>
+    <script src="./js/privacidad.js"></script>
+    <script src="./js/personas.js"></script>
+    <script src="./js/ubicaciones.js"></script>
+    <script src="./js/zonahoraria.js"></script>
+    <script src="./js/main.js"></script>
+
+</body>
+</html>

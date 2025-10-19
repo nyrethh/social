@@ -1,0 +1,347 @@
+/* --- Paleta de Colores Teeker --- */
+:root {
+    --teeker-purple: #522a70;
+    --teeker-yellow: #fbd050;
+    --teeker-pink: #f29cb7;
+    --teeker-cream: #faeadd;
+    --teeker-dark: #222023;
+    --teeker-light: #faf8f3;
+    --teeker-red: #A52A2A;
+}
+
+/* --- Estilos Generales --- */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--teeker-light);
+    color: var(--teeker-dark);
+    display: flex;
+    height: 100vh;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 256px;
+    background-color: var(--teeker-dark);
+    color: var(--teeker-light);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    margin-bottom: 3rem;
+}
+
+.sidebar-header h1 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.05em;
+}
+
+.sidebar nav {
+    flex: 1;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    color: #d1d5db;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+    background-color: #374151;
+}
+
+.nav-link .fas {
+    margin-right: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.active-link {
+    background-color: var(--teeker-purple);
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.sidebar-footer a {
+    color: #9ca3af;
+}
+
+/* --- Contenido Principal (Main) --- */
+main {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+main header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+main header h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+main header p {
+    color: #6b7280;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .grid-col-span-1 {
+        grid-column: span 1 / span 1;
+    }
+    .grid-col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+
+/* --- Tarjetas (Cards) y Formularios --- */
+.card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    padding: 1.5rem;
+}
+
+.form-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 0.25rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(82, 42, 112, 0.2);
+    border-color: var(--teeker-purple);
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 1rem;
+}
+
+/* --- Botones --- */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-actions .btn {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--teeker-purple);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #6d3a94;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+
+/* --- Tabla --- */
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.table-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.table-count {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--teeker-purple);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f9fafb;
+}
+
+th {
+    padding: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tbody {
+    border-top: 1px solid #f3f4f6;
+}
+
+td {
+    padding: 1rem;
+    color: #374151;
+    border-top: 1px solid #f3f4f6;
+}
+
+tr:hover {
+    background-color: #f9fafb;
+}
+
+td.actions {
+    text-align: center;
+}
+
+td.actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: color 0.2s;
+    padding: 0.25rem 0.5rem;
+}
+
+td.actions button:hover {
+    color: var(--teeker-purple);
+}
+
+td.actions button.delete:hover {
+    color: #ef4444;
+}
+
+/* --- Componentes de Estado --- */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    line-height: 1;
+    font-weight: 600;
+    border-radius: 9999px; 
+    border: 1.5px solid;
+    white-space: nowrap;
+}
+
+.status-active {
+    background-color: var(--teeker-yellow); 
+    color: var(--teeker-dark) ; 
+    border-color: #fef08a;
+}
+
+.status-inactive {
+    background-color: var(--teeker-purple);
+    color: var(--teeker-cream);
+    border-color: #fbcfe8;
+}
+
+.table-state-cell {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+}
+
+.table-state-cell .fas {
+    font-size: 1.5rem;
+}
+
+.table-state-cell p {
+    margin-top: 0.5rem;
+}
+
+.table-state-cell .fa-spinner {
+    color: var(--teeker-purple);
+}

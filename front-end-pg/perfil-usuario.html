@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - TEEKER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+
+    <main class="user-main-view">
+        <nav class="user-navbar">
+            <div class="user-navbar-brand"><h1>TEEKER</h1></div>
+            <a href="#" class="logout-btn" onclick="logout(); return false;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </nav>
+
+        <div id="view-mi-perfil" class="user-profile-layout">
+            <div class="profile-card">
+                <div class="profile-cover">
+                    <img id="profile-cover-img" src="https://i.pinimg.com/736x/d9/41/1d/d9411da2ef0178f8c3c3bc902fe7a034.jpg" alt="Foto de Portada">
+                </div>
+                <div class="profile-avatar">
+                    <img id="profile-avatar-img" src="https://i.pinimg.com/736x/94/b1/02/94b1021c4f8294c4a0b6e8213ca0374f.jpg" alt="Foto de Perfil">
+                </div>
+                
+               
+            </div>
+            
+            <div class="profile-secondary-card">
+                 <div class="profile-info">
+                    <h2 id="profile-full-name">Nombre Completo</h2>
+                    <p id="profile-alias">@alias_de_usuario</p>
+                  <button class="edit-profile-btn" id="btn-editar-perfil" onclick="window.location.href = 'formulario-usuario.html';"><i class="fas fa-edit"></i> Editar Perfil</button>
+
+                </div>
+
+                <h3>Información Personal</h3>
+                <div class="info-item"><i class="fas fa-envelope"></i><p id="profile-email">email@example.com</p></div>
+                <div class="info-item"><i class="fas fa-venus-mars"></i><p id="profile-sex">Sexo no especificado</p></div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span>0</span>
+                        <p>Siguiendo</p>
+                    </div>
+                    <div class="stat-item">
+                        <span>0</span>
+                        <p>Seguidores</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-content-card">
+                <h3>Mis Publicaciones</h3>
+                <div id="posts-container" class="posts-list">
+                    <p class="placeholder-text">Todavía no tienes publicaciones.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/core.js"></script>
+    <script src="js/sesion.js"></script> 
+    <script src="js/perfil.js"></script>
+
+
+
+</body>
+</html>
