@@ -152,3 +152,18 @@ export const getPersonaByUsuario = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener el perfil por usuario.' });
     }
 };
+
+
+export const getPublicacionesPorPersona = async (req, res) => {
+    const { id } = req.params; // Este 'id' es el fky_per
+    try {
+        const { rows } = await Pool.query(
+            "SELECT * FROM perfil_personal.publicacion WHERE fky_per = $1 AND est_pub = 'A' ORDER BY fec_pub DESC",
+            [id]
+        );
+        res.json(rows);
+    } catch (error) {
+        console.error("Error al obtener publicaciones:", error);
+        res.status(500).json({ message: "Error al obtener publicaciones" });
+    }
+};

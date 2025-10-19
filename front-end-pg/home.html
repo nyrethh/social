@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - TEEKER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <main class="user-main-view">
+        <nav class="user-navbar">
+            <div class="user-navbar-brand"><h1>TEEKER</h1></div>
+            <a href="perfil-usuario.html" class="navbar-link">
+                <i class="fas fa-user"></i>
+                <span>Mi Perfil</span>
+            </a>
+            <a href="#" class="logout-btn" onclick="logout(); return false;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </nav>
+
+        <div class="feed-layout">
+            
+            <div class="create-post-card">
+                <h3>Crear Publicación</h3>
+                <form id="form-nueva-publicacion">
+    
+    <div class="form-group">
+        <input type="text" id="titulo-publicacion" placeholder="Ponle un título..." required>
+    </div>
+
+    <div class="form-group">
+        <textarea id="contenido-publicacion" placeholder="¿Qué estás pensando?" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <select id="select-ciudad" required>
+            <option value="">-- Selecciona una ciudad --</option>
+            </select>
+    </div>
+    
+    <div class="form-actions">
+        <p id="post-feedback" class="feedback-msg"></p>
+        <button type="submit" class="btn-primary" id="btn-publicar">Publicar</button>
+    </div>
+</form>
+            </div>
+
+            <div id="publicaciones-container" class="posts-list">
+                <p class="placeholder-text">Cargando publicaciones...</p>
+            </div>
+        </div>
+
+    <script src="js/core.js"></script>
+    <script src="js/sesion.js"></script> 
+    <script src="js/home.js"></script>
+
+</body>
+</html>

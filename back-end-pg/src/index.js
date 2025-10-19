@@ -14,6 +14,7 @@ import ciudadRoutes from'./routes/ciudad.routes.js';
 import personasRoutes from './routes/personas.routes.js';
 import privacidadRoutes from './routes/privacidad.routes.js';
 import seguridadRoutes from './routes/seguridad.routes.js';
+import publicacionesRoutes from "./routes/publicacion.routes.js";
 
 
 
@@ -28,8 +29,9 @@ app.use(express.static(frontendPath));
 
 
 // Middleware
-app.use(express.json()); // Para poder entender los JSON que llegan en las peticiones
+app.use(express.json({ limit: '10mb' }));  // Para poder entender los JSON que llegan en las peticiones
 app.use(cors()); // Habilita CORS para permitir que tu front-end se conecte
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Rutas
 /* app.use('/api/seguridad', seguridadRoutes); */
@@ -43,6 +45,7 @@ app.use('/api/ciudades', ciudadRoutes);
 app.use('/api/personas', personasRoutes);
 app.use('/api/privacidad', privacidadRoutes);
 app.use('/api/seguridad', seguridadRoutes);
+app.use("/api/publicaciones", publicacionesRoutes);
 
 
 

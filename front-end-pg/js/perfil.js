@@ -53,6 +53,7 @@ window.cargarPerfil = async function() {
         // Asume un endpoint para buscar el perfil por código de usuario (fky_usu)
         const res = await fetch(`${perfil_api}/usuario/${loggedUser.cod_usu}`);
         
+        
        if (!res.ok) {
            // Si no hay perfil, mostramos un estado de "perfil no completado"
            perfilNombreCompleto.textContent = loggedUser.ali_usu;
@@ -74,8 +75,10 @@ window.cargarPerfil = async function() {
         perfilAlias.textContent = `@${userData.ali_usu}`;
         perfilEmail.textContent = userData.ema_usu;
     perfilSexo.textContent = perfil.sex_per === 'M' ? 'Masculino' : (perfil.sex_per === 'F' ? 'Femenino' : 'Otro');
-    perfilProfilePhoto.src = perfil.per_per || 'https://i.imgur.com/8Km9tLL.png';
-    perfilCoverPhoto.src = perfil.por_per || 'https://i.imgur.com/Qr71crq.jpg';
+    perfilProfilePhoto.src = perfil.per_per || '...';
+    perfilCoverPhoto.src = perfil.por_per || '...';
+
+    await cargarPublicaciones(perfil.cod_per);
 
         // Llenar campos del formulario de edición
   if (editCodPer) { 
@@ -238,4 +241,76 @@ if (formPublicacion) {
             if (postContentEl) postContentEl.value = ''; // Limpiar el textarea
         }
     });
+}
+
+// 1. Crea esta nueva función
+async function cargarPublicaciones(cod_per) {
+    const postsContainer = document.getElementById('posts-container');
+    if (!postsContainer) return;
+
+    try {
+        const res = await fetch(`${API_BASE}/publicaciones/persona/${cod_per}`);
+        
+        if (!res.ok) throw new Error('Error cargando posts');
+        
+        const posts = await res.json();
+        
+        if (posts.length === 0) {
+            postsContainer.innerHTML = '<p class="placeholder-text">Todavía no tienes publicaciones.</p>';
+            return;
+        }
+
+        postsContainer.innerHTML = ''; // Limpiar el placeholder
+        
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('post-item'); // Dales estilo en tu CSS
+            postElement.innerHTML = `
+                <h4>${post.tit_pub}</h4>
+                <p>${post.des_pub}</p>
+                <small>${new Date(post.fec_pub).toLocaleString()}</small>
+            `;
+            postsContainer.appendChild(postElement);
+            // formatear la fecha
+            const fecha = new Date(post.fec_pub).toLocaleString('es-ES', {
+                day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+
+            
+    
+
+        // --- ¡NUEVO HTML DE RENDERIZADO! ---
+            postElement.innerHTML = `
+                <div class="post-header">
+                    <img src="${post.per_per}" alt="Foto de perfil" class="post-avatar-img">
+                    <div class="post-author-info">
+                        <span class="post-author-name">${post.nm1_per} ${post.ap1_per || ''}</span>
+                        <small class="post-date">${fecha}</small>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h4>${post.tit_pub}</h4>
+                    <p>${post.des_pub}</p>
+                </div>
+                <div class="post-reactions">
+                    <button class="reaction-btn">
+                        <i class="fas fa-thumbs-up"></i> Me gusta
+                    </button>
+                    <button class="reaction-btn">
+                        <i class="fas fa-heart"></i> Me encanta
+                    </button>
+                    <button class="reaction-btn">
+                        <i class="fas fa-comment"></i> Comentar
+                    </button>
+                </div>
+            `;
+            postsContainer.appendChild(postElement);
+
+        }); 
+
+
+    } catch (error) {
+        postsContainer.innerHTML = '<p class="placeholder-text">Error al cargar publicaciones.</p>';
+        console.error(error);
+    }
 }

@@ -1,0 +1,140 @@
+/* Importamos estilos base si tienes uno, ej: style.css */
+@import url('style.css'); /* Asegúrate de que este exista y tenga :root variables */
+@import url('perfil.css'); /* Importamos todo de perfil.css */
+
+/*
+   home.css - Estilos para la página principal (feed)
+   Reutiliza .user-main-view y .user-navbar de perfil.css
+*/
+
+/* Añadimos enlace de "Mi Perfil" a la barra */
+.user-navbar {
+    justify-content: space-between;
+}
+
+.user-navbar-brand {
+    justify-self: flex-start;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.navbar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.navbar-link i {
+    margin-right: 6px;
+}
+
+/* Layout principal del feed */
+.feed-layout {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Tarjeta para crear post (similar a .profile-content-card) */
+.create-post-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+}
+
+.create-post-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--teeker-dark-purple, #333);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Importante */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background-color: var(--teeker-purple, #6a48d7);
+    color: #fff;
+    transition: background-color 0.2s;
+}
+.btn-primary:hover {
+    background-color: var(--teeker-dark-purple, #512fad);
+}
+.btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.feedback-msg {
+    font-size: 0.9rem;
+    color: var(--teeker-green, #28a745);
+    margin: 0;
+}
+.feedback-msg.error {
+    color: var(--teeker-red, #dc3545);
+}
+
+/* Contenedor del Feed */
+.feed-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+}
+.feed-title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* Estilos para cada post (puedes copiarlos/mejorarlos de perfil.js) */
+.post-item {
+    border: 1px solid #eee;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.post-item p {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.post-item small {
+    color: #888;
+    font-size: 0.85rem;
+}
