@@ -37,3 +37,25 @@ window.API_BASE = API_BASE;
 window.renderEstado = renderEstado;
 window.renderLoadingState = renderLoadingState;
 window.renderEmptyState = renderEmptyState;
+
+/**
+ * Realiza una petición fetch con el token de autenticación.
+ * @param {string} url - La URL a la que se hace la petición.
+ * @param {object} options - Opciones para la petición fetch.
+ * @returns {Promise<Response>} - La promesa de la respuesta.
+ */
+function fetchWithAuth(url, options = {}) {
+    const token = localStorage.getItem('jwt_token');
+
+    const headers = {
+        ...options.headers,
+    };
+
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    return fetch(url, { ...options, headers });
+}
+
+window.fetchWithAuth = fetchWithAuth;

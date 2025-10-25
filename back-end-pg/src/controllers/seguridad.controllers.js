@@ -1,6 +1,11 @@
 // Controlador para `seguridad`.
 // Implementación mínima del endpoint de login que consulta la tabla `seguridad.usuario`.
 import { Pool } from "../db.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
+// TODO: Mover a variables de entorno
+const JWT_SECRET = "your_jwt_secret";
 
 export const getSeguridades = async (req, res) => {
     // TODO: si hay una tabla concreta, reemplazar la consulta
@@ -42,7 +47,6 @@ export const deleteSeguridad = async (req, res) => {
 
 // POST /api/seguridad/login
 // Body: { ali_usu: string (alias o email), cla_usu: string }
-// Nota: en producción debes usar hashing (bcrypt) y HTTPS.
 export const loginSeguridad = async (req, res) => {
     const { ali_usu, cla_usu } = req.body;
     if (!ali_usu || !cla_usu) {
@@ -51,10 +55,11 @@ export const loginSeguridad = async (req, res) => {
 
     try {
         const { rows } = await Pool.query(
-            `SELECT cod_usu, ali_usu, ema_usu
-             FROM seguridad.usuario
-             WHERE (ali_usu = $1 OR ema_usu = $1) AND cla_usu = $2`,
-            [ali_usu, cla_usu]
+            `SELECT u.cod_usu, u.ali_usu, u.ema_usu, u.cla_usu, r.nom_rol
+             FROM seguridad.usuario u
+             JOIN seguridad.rol r ON u.fky_rol = r.cod_rol
+             WHERE (u.ali_usu = $1 OR u.ema_usu = $1)`,
+            [ali_usu]
         );
 
         if (rows.length === 0) {
@@ -62,16 +67,32 @@ export const loginSeguridad = async (req, res) => {
         }
 
         const user = rows[0];
-        const isAdmin = user.ali_usu && user.ali_usu.toLowerCase() === 'admin';
-    const rolNombre = isAdmin ? 'Administrador' : 'Usuario';
+
+        const isMatch = cla_usu === user.cla_usu;
+
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Credenciales inválidas.' });
+        }
+
+        const token = jwt.sign(
+            {
+                cod_usu: user.cod_usu,
+                ali_usu: user.ali_usu,
+                ema_usu: user.ema_usu,
+                nom_rol: user.nom_rol
+            },
+            JWT_SECRET,
+            { expiresIn: '1h' }
+        );
 
         return res.status(200).json({
             message: 'Inicio de sesión exitoso',
+            token: token,
             user: {
                 cod_usu: user.cod_usu,
                 ali_usu: user.ali_usu,
                 ema_usu: user.ema_usu,
-                rol_nombre: rolNombre
+                nom_rol: user.nom_rol
             }
         });
 

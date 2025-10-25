@@ -77,10 +77,10 @@ export const putPersona = async (req, res) => {
         res.json(rows[0]);
 
     } catch (error) {
-        console.error(error); // Mantén esto para depuración
+        console.error(error); // esto es para depuracion.
 
-        // Mejor manejo de errores (como el que viste)
-        if (error.code === '23502') { // 'NOT NULL' violation
+        // Mejor manejo de errores de validacion que sirve para campos no nulos
+        if (error.code === '23502') { // NOT NULL VIOLACION
             return res.status(400).json({ 
                 message: `Error: El campo '${error.column}' no puede ser nulo.`
             });
@@ -150,20 +150,5 @@ export const getPersonaByUsuario = async (req, res) => {
     } catch (error) {
         console.error("Error al obtener perfil por usuario:", error);
         res.status(500).json({ message: 'Error al obtener el perfil por usuario.' });
-    }
-};
-
-
-export const getPublicacionesPorPersona = async (req, res) => {
-    const { id } = req.params; // Este 'id' es el fky_per
-    try {
-        const { rows } = await Pool.query(
-            "SELECT * FROM perfil_personal.publicacion WHERE fky_per = $1 AND est_pub = 'A' ORDER BY fec_pub DESC",
-            [id]
-        );
-        res.json(rows);
-    } catch (error) {
-        console.error("Error al obtener publicaciones:", error);
-        res.status(500).json({ message: "Error al obtener publicaciones" });
     }
 };

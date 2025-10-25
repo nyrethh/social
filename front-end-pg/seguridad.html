@@ -18,12 +18,12 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" id="nav-perfil" class="nav-link"><i class="fas fa-home"></i><span>Mi Perfil</span></a></li>
                 <li class="menu-separator">ADMINISTRACIÓN</li>
                 <li><a href="#" id="nav-usuarios" class="nav-link"><i class="fas fa-users-cog"></i><span>Usuarios</span></a></li>
                 <li><a href="#" id="nav-roles" class="nav-link"><i class="fas fa-user-shield"></i><span>Roles</span></a></li>
                 <li><a href="#" id="nav-personas" class="nav-link"><i class="fas fa-id-card"></i><span>Perfiles</span></a></li>
                 <li><a href="#" id="nav-privacidad" class="nav-link"><i class="fas fa-lock"></i><span>Privacidad</span></a></li>
+                <li><a href="#" id="nav-publicaciones" class="nav-link"><i class="fas fa-newspaper"></i><span>Publicaciones</span></a></li>
                 <li class="menu-separator">DATOS GENERALES</li>
                 <li><a href="#" id="nav-ubicaciones" class="nav-link"><i class="fas fa-map-marker-alt"></i><span>Ubicaciones</span></a></li>
                 <li><a href="#" id="nav-zonahoraria" class="nav-link"><i class="fas fa-clock"></i><span>Zonas Horarias</span></a></li>
@@ -34,7 +34,7 @@
         </div>
     </aside>
 
-    <main id="view-login" class="login-view">
+    <!-- <main id="view-login" class="login-view">
         <div class="login-container">
             <h1 class="logo-title">TEEKER</h1>
             <h2>Inicia Sesión</h2>
@@ -56,99 +56,49 @@
                 <p id="login-error" class="error-message hidden">Credenciales incorrectas.</p>
             </form>
         </div>
-    </main>
+    </main> -->
 
-    <main id="view-perfil" class="hidden social-view">
-        <header class="profile-header">
-            <div id="perfil-cover-photo" class="cover-photo"></div>
-            <div class="profile-info-container">
-                <div id="perfil-profile-photo" class="profile-photo"></div>
-                <h2 id="perfil-nombre-completo"></h2>
-                <p class="profile-alias" id="perfil-alias"></p>
-                <div class="profile-actions">
-                    <button class="btn btn-secondary" id="btn-editar-perfil"><i class="fas fa-user-edit"></i> Editar Perfil</button>
-                    <button class="btn btn-admin hidden" id="btn-admin-panel"><i class="fas fa-tools"></i> Panel de Administración</button>
-                </div>
+    <main id="view-no-access" class="hidden admin-view">
+        <div class="card table-card">
+            <div class="table-header">
+                <h3>Acceso Denegado</h3>
             </div>
-        </header>
-
-        <div class="social-content-container">
-            <section class="profile-details-card card">
-                <h3>Detalles</h3>
-                <p><strong>Email:</strong> <span id="perfil-email"></span></p>
-                <p><strong>Sexo:</strong> <span id="perfil-sexo"></span></p>
-            </section>
-
-            <section class="post-creation-card card">
-                <h3>Crear Publicación</h3>
-                <form id="form-publicacion">
-                    <textarea id="post-content" placeholder="¿Qué estás pensando hoy?" rows="3" class="input-field" required></textarea>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Publicar
-                        </button>
-                    </div>
-                </form>
-            </section>
-            
-            <section class="feed-section">
-                <h3>Mi Feed</h3>
-                <div id="feed-container">
-                    <div class="card post-mock">
-                        <div class="post-header">
-                            <div class="post-author-photo"></div>
-                            <span class="post-author-name">Ejemplo de Post</span>
-                        </div>
-                        <p>¡Bienvenido/a a Teeker! Esta es tu primera publicación de ejemplo. Haz clic en 'Publicar' para añadir la tuya.</p>
-                        <small>Hace 5 minutos</small>
-                    </div>
-                </div>
-            </section>
+            <div class="table-container" style="text-align: center; padding: 2rem;">
+                <i class="fas fa-exclamation-triangle fa-3x" style="color: #ffc107;"></i>
+                <p style="margin-top: 1rem;">No tienes permiso para acceder a esta página.</p>
+                <!-- Aquí puedes agregar una imagen si lo deseas -->
+                <!-- <img src="path/to/your/image.png" alt="Acceso Denegado"> -->
+            </div>
         </div>
     </main>
 
-    <div id="perfil-edit-form-container" class="card hidden">
-        <h3 class="form-title">Editar Mi Perfil</h3>
-        <form id="form-editar-perfil">
-            <input type="hidden" id="edit-persona-cod_per">
+    <main id="view-publicaciones" class="hidden admin-view">
+        <header>
             <div>
-                <label for="edit-nm1_per">Primer Nombre</label>
-                <input type="text" id="edit-nm1_per" class="input-field" required>
+                <h2>Gestión de Publicaciones</h2>
+                <p>Modera las publicaciones de los usuarios.</p>
             </div>
-             <div>
-                <label for="edit-nm2_per">Segundo Nombre</label>
-                <input type="text" id="edit-nm2_per" class="input-field">
+        </header>
+        <div class="card table-card">
+            <div class="table-header">
+                <h3>Lista de Publicaciones</h3>
+                <span id="publicaciones-count" class="table-count"></span>
             </div>
-             <div>
-                <label for="edit-ap1_per">Primer Apellido</label>
-                <input type="text" id="edit-ap1_per" class="input-field" required>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Autor</th>
+                            <th>Contenido</th>
+                            <th>Fecha</th>
+                            <th style="text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="publicaciones-table"></tbody>
+                </table>
             </div>
-             <div>
-                <label for="edit-ap2_per">Segundo Apellido</label>
-                <input type="text" id="edit-ap2_per" class="input-field">
-            </div>
-            <div>
-                <label for="edit-sex_per">Sexo</label>
-                <select id="edit-sex_per" class="input-field">
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
-                </select>
-            </div>
-            <div>
-                <label for="edit-per_per">URL Foto de Perfil</label>
-                <input type="text" id="edit-per_per" class="input-field">
-            </div>
-             <div>
-                <label for="edit-por_per">URL Foto de Portada</label>
-                <input type="text" id="edit-por_per" class="input-field">
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
-                <button type="button" class="btn btn-secondary" onclick="perfil_hideEditForm()">Cancelar</button>
-            </div>
-        </form>
-    </div>
-
+        </div>
+    </main>
 
     <main id="view-usuarios" class="hidden admin-view">
         <header>
@@ -606,6 +556,7 @@
     <script src="./js/roles.js"></script>
     <script src="./js/privacidad.js"></script>
     <script src="./js/personas.js"></script>
+    <script src="./js/publicaciones.js"></script>
     <script src="./js/ubicaciones.js"></script>
     <script src="./js/zonahoraria.js"></script>
     <script src="./js/main.js"></script>

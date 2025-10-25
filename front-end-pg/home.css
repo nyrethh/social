@@ -1,4 +1,4 @@
-/* Importamos estilos base si tienes uno, ej: style.css */
+
 @import url('style.css'); /* Asegúrate de que este exista y tenga :root variables */
 @import url('perfil.css'); /* Importamos todo de perfil.css */
 

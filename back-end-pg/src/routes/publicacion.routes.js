@@ -1,12 +1,17 @@
 import { Router } from "express";
-import { postPublicacion, getPublicacionesPorPersona } from "../controllers/publicacion.controllers.js";
+import { getPublicaciones, postPublicacion, getPublicacionesPorPersona, deletePublicacion } from "../controllers/publicacion.controllers.js";
+import { authenticateToken, isAdmin } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-// Esta ruta POST / maneja las peticiones a /api/publicaciones
-router.post("/", postPublicacion);
+// Rutas protegidas para administradores
+router.get("/", [authenticateToken, isAdmin], getPublicaciones);
+router.delete("/:id", [authenticateToken, isAdmin], deletePublicacion);
 
-// Esta ruta GET maneja las peticiones a /api/publicaciones/persona/:id
+// Rutas para usuarios autenticados
+router.post("/", authenticateToken, postPublicacion);
+
+// Rutas públicas
 router.get("/persona/:id", getPublicacionesPorPersona);
 
 export default router;

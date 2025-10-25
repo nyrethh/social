@@ -38,12 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (res.ok) {
-                    // 1. Guardar la sesión y datos del usuario en localStorage
+                    // 1. Guardar la sesión, el token y datos del usuario en localStorage
                     localStorage.setItem('user_session', JSON.stringify(data.user));
+                    localStorage.setItem('jwt_token', data.token);
                     localStorage.setItem('is_logged_in', 'true');
 
                     // 2. Redirección basada en el rol simulado
-                    if (data.user.rol_nombre === 'Administrador') {
+                    if (data.user.nom_rol === 'Admin') {
                         // Redirige a la pantalla de administrador
                         window.location.href = 'seguridad.html';
                     } else {

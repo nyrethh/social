@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         roles: document.getElementById('nav-roles'),
         personas: document.getElementById('nav-personas'),
         privacidad: document.getElementById('nav-privacidad'),
+        publicaciones: document.getElementById('nav-publicaciones'),
         ubicaciones: document.getElementById('nav-ubicaciones'),
         zonahoraria: document.getElementById('nav-zonahoraria'),
         cerrarSesion: document.getElementById('nav-cerrar-sesion'),
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         roles: document.getElementById('view-roles'),
         personas: document.getElementById('view-personas'),
         privacidad: document.getElementById('view-privacidad'),
+        publicaciones: document.getElementById('view-publicaciones'),
         ubicaciones: document.getElementById('view-ubicaciones'),
         zonahoraria: document.getElementById('view-zonahoraria'),
     };
@@ -83,26 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Configuración inicial de la sesión
-    const ADMIN_ROLE_ID = 'COD_ROL_ADMIN'; // Asume un ID de rol para administrador
-    const USER_ROLE_ID = 'COD_ROL_USUARIO'; // Asume un ID de rol para usuario normal
-
     window.session = {
-        isLoggedIn: () => localStorage.getItem('user_token') !== null,
-        getUser: () => JSON.parse(localStorage.getItem('logged_user')),
-        login: (userData) => {
-            // Mock: Simular almacenamiento de token y datos de usuario
-            localStorage.setItem('user_token', 'mock-token-12345'); 
-            localStorage.setItem('logged_user', JSON.stringify(userData));
-        },
+        isLoggedIn: () => localStorage.getItem('jwt_token') !== null,
+        getUser: () => JSON.parse(localStorage.getItem('user_session')),
         logout: () => {
-            localStorage.removeItem('user_token');
-            localStorage.removeItem('logged_user');
+            localStorage.removeItem('jwt_token');
+            localStorage.removeItem('user_session');
+            localStorage.removeItem('is_logged_in');
         },
         isAdmin: () => {
              const user = window.session.getUser();
-             // Mock: Asume que el rol se almacena en el objeto de usuario y es 'Administrador' o 'admin'
-             return user && (user.rol_nombre === 'Administrador' || user.rol_nombre === 'Admin');
+             return user && user.nom_rol === 'Admin';
         }
     }
 
@@ -117,11 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Comprobación inicial para decidir la vista a mostrar
     if (window.session.isLoggedIn()) {
-        const user = window.session.getUser();
-        if (user && user.rol_nombre === 'Administrador') {
+        if (window.session.isAdmin()) {
             navigateTo('usuarios'); // Iniciar en una vista de Admin si es admin
         } else {
-             navigateTo('perfil'); // Iniciar en el perfil si es usuario normal
+             navigateTo('no-access'); // Mostrar vista de acceso denegado
         }
     } else {
         navigateTo('login'); // Mostrar la pantalla de Login
